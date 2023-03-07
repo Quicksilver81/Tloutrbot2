@@ -69,7 +69,7 @@ async def root_route_handler(_):
         }
     )
 
-@Client.on_message(filters.command('log'))
+@Client.on_message(filters.command('log') & filters.user(Config.OWNERS))
 async def log_handler(client, message):
     with open('log.txt', 'rb') as f:
         try:
@@ -79,7 +79,7 @@ async def log_handler(client, message):
         except Exception as e:
             await message.reply_text(str(e))
 
-@Client.on_message(filters.command('users'))
+@Client.on_message(filters.command('users') & & filters.user(Config.OWNERS))
 async def list_users(bot, message):
     # https://t.me/GetTGLink/4184
     total_users = await db.total_users_count()
