@@ -52,22 +52,6 @@ import time
 from aiohttp import web
 from aiohttp.http_exceptions import BadStatusLine
 
-routes = web.RouteTableDef()
-
-@routes.get("/", allow_head=True)
-async def root_route_handler(_):
-    return web.json_response(
-        {
-            "server_status": "running",
-            "telegram_bot": "@" + Config.BOT_USERNAME,
-            "loads": dict(
-                ("bot" + str(c + 1), l)
-                for c, (_, l) in enumerate(
-                    sorted(work_loads.items(), key=lambda x: x[1], reverse=True)
-                )
-            )
-        }
-    )
 
 @Client.on_message(filters.command('log') & filters.user(Config.OWNERS))
 async def log_handler(client, message):
