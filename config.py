@@ -63,7 +63,6 @@ class Config:
     BOT_TOKEN = os.environ.get("BOT_TOKEN", None)
     OWNER_ID = os.environ.get("OWNER_ID", 'mmagneto') 
     LOG_CHANNEL = os.environ.get("LOG_CHANNEL", "")
-    KANAL = os.environ.get("KANAL", "")
     SESSION_NAME = os.environ.get("SESSION_NAME", "")
     DATABASE_URL = os.environ.get("DATABASE_URL", "")
     AUTH_CHANNEL = os.environ.get("AUTH_CHANNEL", "")
