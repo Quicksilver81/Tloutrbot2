@@ -60,7 +60,7 @@ class Config:
 
     APP_ID = os.environ.get("APP_ID", None)
     API_HASH = os.environ.get("API_HASH", None)
-    STRING_SESSION = os.environ.get("STRING_SESSION", None)
+    BOT_TOKEN = os.environ.get("BOT_TOKEN", None)
     OWNER_ID = os.environ.get("OWNER_ID", 'mmagneto') 
     LOG_CHANNEL = os.environ.get("LOG_CHANNEL", "")
     KANAL = os.environ.get("KANAL", "")
