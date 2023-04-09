@@ -90,7 +90,7 @@ async def index_files(bot, query):
     msg = query.message
 
     await query.answer('Processing...⏳', show_alert=True)
-    if int(from_user) == Config.OWNER_ID:
+    if from_user == Config.OWNER_ID:
         await bot.send_message(int(from_user),
                                f'Your Submission for indexing {chat} has been accepted by our moderators and will be added soon.',
                                reply_to_message_id=int(lst_msg_id))
