@@ -10,14 +10,12 @@ from umongo import Instance, Document, fields
 from motor.motor_asyncio import AsyncIOMotorClient
 from marshmallow.exceptions import ValidationError
 
-from info import DATABASE_URI, DATABASE_NAME, COLLECTION_NAME, USE_CAPTION_FILTER
-from .helpers import unpack_new_file_id
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-client = AsyncIOMotorClient(DATABASE_URI)
-database = client[DATABASE_NAME]
+client = AsyncIOMotorClient(Config.DATABASE_URL)
+database = client[Config.DATABASE_URL]
 instance = Instance.from_db(database)
 
 
