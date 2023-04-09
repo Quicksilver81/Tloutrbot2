@@ -11,7 +11,7 @@ from pyrogram import Client, emoji, filters
 from pyrogram.errors import UserNotParticipant
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultCachedDocument
 
-from database.filters_helper import get_search_results
+from database.database import get_search_results
 
 logger = logging.getLogger(__name__)
 from pyrogram import filters, Client
