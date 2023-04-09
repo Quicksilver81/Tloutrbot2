@@ -51,7 +51,8 @@ class Bot(Client):
         await super().stop()
         LOGGER.info(msg="App Stopped.")
         exit()
-        async def iter_messages(
+
+    async def iter_messages(
         self,
         chat_id: Union[int, str],
         limit: int,
