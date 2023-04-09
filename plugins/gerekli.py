@@ -10,7 +10,7 @@ import asyncio
 from pyrogram import Client, emoji, filters
 from pyrogram.errors import UserNotParticipant
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultCachedDocument
-from config import Config 
+from config import Config, temp
 from database.database import get_search_results
 CACHE_TIME = 300
 cache_time = 0 if Config.OWNER_ID or Config.AUTH_CHANNEL else CACHE_TIME
