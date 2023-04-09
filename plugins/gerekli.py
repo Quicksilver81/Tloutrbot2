@@ -10,7 +10,7 @@ from urllib.parse import quote
 from pyrogram import Client, emoji, filters
 from pyrogram.errors import UserNotParticipant
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultCachedDocument
-
+from config import Config 
 from database.database import get_search_results
 CACHE_TIME = 300
 cache_time = 0 if Config.OWNER_ID or Config.AUTH_CHANNEL else CACHE_TIME
@@ -18,7 +18,6 @@ logger = logging.getLogger(__name__)
 from pyrogram import filters, Client
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.types import Message
-from config import Config
 from database.filters_helper import(
    add_filter,
    find_filter,
