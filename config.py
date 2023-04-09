@@ -56,6 +56,17 @@ LOGGER.info("--- CONFIGS STARTS HERE ---")
 
 botStartTime2 = time.time()
 
+class temp(object):
+    BANNED_USERS = []
+    BANNED_CHATS = []
+    ME = None
+    CURRENT=int(os.environ.get("SKIP", 2))
+    CANCEL = False
+    MELCOW = {}
+    U_NAME = None
+    B_NAME = None
+    SETTINGS = {}
+
 class Config:
 
     APP_ID = os.environ.get("APP_ID", None)
