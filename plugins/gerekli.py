@@ -90,7 +90,7 @@ async def index_files(bot, query):
     msg = query.message
 
     await query.answer('Processing...⏳', show_alert=True)
-    if int(from_user) not in ADMINS:
+    if int(from_user) == Config.OWNER_ID:
         await bot.send_message(int(from_user),
                                f'Your Submission for indexing {chat} has been accepted by our moderators and will be added soon.',
                                reply_to_message_id=int(lst_msg_id))
@@ -139,11 +139,11 @@ async def send_for_index(bot, message):
     if k.empty:
         return await message.reply('This may be group and iam not a admin of the group.')
 
-    if message.from_user.id in ADMINS:
+    if message.from_user.username == Config.OWNER_ID:
         buttons = [
             [
                 InlineKeyboardButton('Yes',
-                                     callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.id}')
+                                     callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.username}')
             ],
             [
                 InlineKeyboardButton('close', callback_data='close_data'),
