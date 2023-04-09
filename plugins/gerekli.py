@@ -80,7 +80,7 @@ async def index_files(bot, query):
     _, raju, chat, lst_msg_id, from_user = query.data.split("#")
     if raju == 'reject':
         await query.message.delete()
-        await bot.send_message(int(from_user),
+        await bot.send_message(from_user,
                                f'Your Submission for indexing {chat} has been decliened by our moderators.',
                                reply_to_message_id=int(lst_msg_id))
         return
@@ -91,7 +91,7 @@ async def index_files(bot, query):
 
     await query.answer('Processing...⏳', show_alert=True)
     if from_user == Config.OWNER_ID:
-        await bot.send_message(int(from_user),
+        await bot.send_message(from_user,
                                f'Your Submission for indexing {chat} has been accepted by our moderators and will be added soon.',
                                reply_to_message_id=int(lst_msg_id))
     await msg.edit(
