@@ -4,7 +4,8 @@ from config import Config
 
 import re
 import logging
-
+from pyrogram.file_id import FileId
+from pymongo.errors import DuplicateKeyError
 from pymongo.errors import DuplicateKeyError
 from umongo import Instance, Document, fields
 from motor.motor_asyncio import AsyncIOMotorClient
