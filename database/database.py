@@ -3,6 +3,7 @@ import motor.motor_asyncio
 from config import Config
 from struct import pack
 import re
+import base64
 import logging
 from pyrogram.file_id import FileId
 from pymongo.errors import DuplicateKeyError
