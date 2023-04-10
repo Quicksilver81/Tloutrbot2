@@ -1,7 +1,7 @@
 import pyrogram
 import logging
 from pyrogram import Client, filters
-
+from config import Config
 logger = logging.getLogger(__name__)
 
 @Client.on_message(filters.command('log') & filters.user(Config.OWNERS))
