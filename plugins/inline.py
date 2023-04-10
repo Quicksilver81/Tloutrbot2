@@ -54,7 +54,7 @@ async def answer(bot:Client, query:CallbackQuery):
         
         results.append(
             InlineQueryResultCachedDocument(
-                title=file.file_name,
+                title=file.caption,
                 document_file_id=file.file_id,
                 caption=f_caption,
                 description=altmetin,
