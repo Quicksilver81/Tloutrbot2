@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 client = AsyncIOMotorClient(Config.DATABASE_URL)
-db = client[Config.DATABASE_NAME]
+db = client[Config.SESSION_NAME]
 instance = Instance.from_db(db)
 
 
