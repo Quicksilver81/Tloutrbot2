@@ -147,7 +147,7 @@ async def send_for_index(bot:Client, message:Message):
     await bot.send_message(Config.OWNER_ID, tosend, reply_markup=reply_markup)
     await message.reply_text('Katkılarınız için teşekkürler. Moderatörlerimiz içeriğinizi inceledikten sonra size buradan dönüş yapacak.')
 
-@Client.on_message(filters.command('setskip') & filters.user(ADMINS))
+@Client.on_message(filters.command('setskip') & filters.user(Config.OWNER_ID))
 async def set_skip_number(bot, message):
     if ' ' in message.text:
         _, skip = message.text.split(" ")
