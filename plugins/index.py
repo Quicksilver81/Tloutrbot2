@@ -37,6 +37,10 @@ async def index_files(bot, query):
     msg = query.message
 
     await query.answer('İşleniyor...', show_alert=False)
+    if int(from_user) not in Config.ADMINS:
+        await bot.send_message(int(from_user),
+                               f'{chat} için indexlemeniz kabul edildi.',
+                               reply_to_message_id=int(lst_msg_id))
     await msg.edit(
         "Starting Indexing",
         reply_markup=InlineKeyboardMarkup(
@@ -104,17 +108,18 @@ async def send_for_index(bot:Client, message:Message):
             f'\n\nBaş ID: {str(temp.CURRENT)}' \
             f'\nSon ID: `{last_msg_id}`' \
             f'\n\n5. mesajdan başla: `/setskip 5`' \
-    buttons = [
-        [InlineKeyboardButton('Yes (DB)',
-                                callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.id}#dbindex')
-        ],
-        [InlineKeyboardButton('Yes (Fast)',
-                                callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.id}#fastindex')
-        ],
-        [InlineKeyboardButton('Reject Index', callback_data='close_data')]]
-    reply_markup = InlineKeyboardMarkup(buttons)
+    if message.from_user.id in Config.ADMINS:
+        buttons = [
+            [InlineKeyboardButton('Yes (DB)',
+                                    callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.id}#dbindex')
+            ],
+            [InlineKeyboardButton('Yes (Fast)',
+                                    callback_data=f'index#accept#{chat_id}#{last_msg_id}#{message.from_user.id}#fastindex')
+            ],
+            [InlineKeyboardButton('Reject Index', callback_data='close_data')]]
+        reply_markup = InlineKeyboardMarkup(buttons)
         
-    return await message.reply_text(tosend, reply_markup=reply_markup)
+        return await message.reply_text(tosend, reply_markup=reply_markup)
 
     if type(chat_id) is int:
         try: link = (await bot.create_chat_invite_link(chat_id)).invite_link
