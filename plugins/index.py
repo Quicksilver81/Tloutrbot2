@@ -6,7 +6,7 @@ from pyrogram.errors.exceptions.bad_request_400 import \
 from pyrogram.errors.exceptions.not_acceptable_406 import ChannelPrivate
 from pyrogram.enums import MessageMediaType, ChatType
 
-from database.inlineyardimci import save_file
+from database.inlineyardimcisi import save_file
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 from pyrogram.errors import FloodWait
 from utils import temp
