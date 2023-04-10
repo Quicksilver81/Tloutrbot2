@@ -183,6 +183,14 @@ class Database:
         all_users = self.col.find({})
         return all_users
 
+    async def add_button(self, buttext):
+        butonlar = self.new_user(buttext)
+        await self.col.insert_one(butonlar)
+
+    async def get_all_button(self):
+        butonlar = self.col.find({})
+        return butonlar
+    
     async def delete_user(self, user_id):
         await self.col.delete_many({'id': user_id})
 
