@@ -42,14 +42,13 @@ async def answer(bot:Client, query:CallbackQuery):
     reply_markup = get_reply_markup(bot.username, query=text)
     files, next_offset, total = await get_search_results(text,
                                                          file_type=file_type,
-                                                         max_results=BUTTON_COUNT,
+                                                         max_results=Config.BUTTON_COUNT,
                                                          offset=offset)
 
     for file in files:
         f_caption = file.caption
         if not f_caption: f_caption = str(file.file_name)
-        f_caption += '' if CUSTOM_FILE_CAPTION is None else f'\n{CUSTOM_FILE_CAPTION}'
-
+        
         altmetin = f'Boyut: {get_size(file.file_size)}, Tür: {file.file_type}'
         inlinecaption = None
         
