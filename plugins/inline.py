@@ -50,7 +50,7 @@ async def answer(bot:Client, query:CallbackQuery):
         if not f_caption: f_caption = str(file.file_name)
         
         altmetin = f'Boyut: {get_size(file.file_size)}, Tür: {file.file_type}'
-        inlinecaption = None
+        inlinecaption = file.caption
         
         results.append(
             InlineQueryResultCachedDocument(
