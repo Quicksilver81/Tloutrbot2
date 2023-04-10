@@ -82,3 +82,4 @@ class Config:
     BROADCAST_AS_COPY = bool(os.environ.get("BROADCAST_AS_COPY", True))
     SAVE_USER = "yes" 
     COLLECTION_NAME = os.environ.get('COLLECTION_NAME', 'dosyalar')
+    BUTTON_COUNT = int(environ.get('BUTTON_COUNT', 10))
