@@ -107,7 +107,8 @@ async def send_for_index(bot:Client, message:Message):
             f"\nİndexleyen Link: tg://user?id={str(message.from_user.id)}" \
             f'\n\nBaş ID: {str(temp.CURRENT)}' \
             f'\nSon ID: `{last_msg_id}`' \
-            f'\n\n5. mesajdan başla: `/setskip 5`' \
+            f'\n\n5. mesajdan başla: `/setskip 5`' 
+
     if message.from_user.id in Config.ADMINS:
         buttons = [
             [InlineKeyboardButton('Yes (DB)',
