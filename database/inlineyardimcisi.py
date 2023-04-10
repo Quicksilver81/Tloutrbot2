@@ -119,8 +119,6 @@ async def get_search_results(query, file_type=None, max_results=BUTTON_COUNT, of
     cursor.skip(offset).limit(max_results)
     # Get list of files
     files = await cursor.to_list(length=max_results)
-    # temizle
-    for file in files: file.file_name = temizle(file.file_name)
 
     return files, next_offset, total_results
 
