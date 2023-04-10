@@ -81,3 +81,4 @@ class Config:
     BOT_USERNAME = os.environ.get("BOT_USERNAME", "")
     BROADCAST_AS_COPY = bool(os.environ.get("BROADCAST_AS_COPY", True))
     SAVE_USER = "yes" 
+    COLLECTION_NAME = os.environ.get('COLLECTION_NAME', 'dosyalar')
