@@ -83,3 +83,4 @@ class Config:
     SAVE_USER = "yes" 
     COLLECTION_NAME = os.environ.get('COLLECTION_NAME', 'dosyalar')
     BUTTON_COUNT = int(os.environ.get('BUTTON_COUNT', 10))
+    USE_CAPTION_FILTER = is_enabled(os.environ.get('USE_CAPTION_FILTER', True))
