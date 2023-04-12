@@ -3,13 +3,20 @@ from urllib.parse import quote
 from pyrogram import Client, emoji, filters
 from pyrogram.errors.exceptions.bad_request_400 import QueryIdInvalid
 from pyrogram.types import CallbackQuery
-from database.inlineyardimcisi import get_search_results, delete_all_files
+from database.inlineyardimcisi import get_search_results
 from utils import is_subscribed, get_size
 from config import Config
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultCachedDocument
-
+from database.inlineyardimcisi import Media
 logger = logging.getLogger(__name__)
 cache_time = 0 if Config.OWNER_ID or Config.AUTH_CHANNEL else Config.CACHE_TIME
+
+async def delete_all_files(message:Message):
+    try:
+        await Media.collection.drop()
+        await message.edit_text(f"Tüm dosyalar silindi.\n\nŞimdi mutlu musun?")
+    except Exception as e:
+        await message.edit_text(f"Couldn't remove all files!\n{str(e)}")
 
 
 def get_reply_markup(username, query):
