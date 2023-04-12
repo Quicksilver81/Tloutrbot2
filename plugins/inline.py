@@ -16,7 +16,7 @@ async def delete_all_files(bot, message):
         await Media.collection.drop()
         await message.edit_text(f"Tüm dosyalar silindi.\n\nŞimdi mutlu musun?")
     except Exception as e:
-        await message.edit_text(f"Couldn't remove all files!\n{str(e)}")
+        await bot.send_message(message.from_user.id, e)
 
 
 def get_reply_markup(username, query):
