@@ -100,8 +100,6 @@ async def get_search_results(query, file_type=None, max_results=Config.BUTTON_CO
 
     if 1 == 1:
         filter = {'$or': [{'file_name': regex}, {'caption': regex}]}
-    if file_type:
-        filter['file_type'] = file_type
 
     total_results = await Media.count_documents(filter)
     next_offset = offset + max_results
