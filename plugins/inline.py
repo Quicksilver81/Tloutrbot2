@@ -2,7 +2,7 @@ import logging
 from urllib.parse import quote
 from pyrogram import Client, emoji, filters
 from pyrogram.errors.exceptions.bad_request_400 import QueryIdInvalid
-from pyrogram.types import CallbackQuery
+from pyrogram.types import CallbackQuery, Message
 from database.inlineyardimcisi import get_search_results
 from utils import is_subscribed, get_size
 from config import Config
