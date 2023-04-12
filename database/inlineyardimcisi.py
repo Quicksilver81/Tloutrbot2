@@ -51,7 +51,7 @@ async def save_file(media):
         return 4
 
     file_id, file_ref = unpack_new_file_id(media.file_id)
-    file_name = re.sub(r"(_|\-|\.|\+)", " ", str(media.caption))
+    file_name = re.sub(r"(_|\-|\.|\+)", " ", str(media.file_name))
     try:
         file = Media(
             file_id=file_id,
@@ -98,11 +98,8 @@ async def get_search_results(query, file_type=None, max_results=Config.BUTTON_CO
     except:
         return [], ''
 
-    if Config.USE_CAPTION_FILTER:
+    if 1 == 1:
         filter = {'$or': [{'file_name': regex}, {'caption': regex}]}
-    else:
-        filter = {'file_name': regex}
-
     if file_type:
         filter['file_type'] = file_type
 
