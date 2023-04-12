@@ -54,7 +54,7 @@ async def answer(bot:Client, query:CallbackQuery):
                                                          offset=offset)
 
     for file in files:
-        f_caption = file.caption
+        f_caption = f"{file.caption}\n\nOwner of This Magic: @MarvelTrRobot"
         if not f_caption: f_caption = str(file.file_name)
         
         altmetin = f'Boyut: {get_size(file.file_size)}, Tür: {file.file_type}'
