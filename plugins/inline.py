@@ -11,7 +11,7 @@ from database.inlineyardimcisi import Media
 logger = logging.getLogger(__name__)
 cache_time = 0 if Config.OWNER_ID or Config.AUTH_CHANNEL else Config.CACHE_TIME
 
-async def delete_all_files(message:Message):
+async def delete_all_files(bot, message):
     try:
         await Media.collection.drop()
         await message.edit_text(f"Tüm dosyalar silindi.\n\nŞimdi mutlu musun?")
@@ -105,7 +105,7 @@ async def inlinedosyasil(bot, message):
         f'Tüm {tayp.lower()} silinecek.\nDevam etmek istiyor musunuz?',
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton(text=f"Tüm {tayp}ı Sil", callback_data=delete_all_files)]
+                [InlineKeyboardButton(text=f"Tüm {tayp}ı Sil", callback_data='delete_all_files')]
             ]
         ),
         quote=True,
