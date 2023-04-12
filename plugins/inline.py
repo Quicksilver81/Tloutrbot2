@@ -3,7 +3,7 @@ from urllib.parse import quote
 from pyrogram import Client, emoji, filters
 from pyrogram.errors.exceptions.bad_request_400 import QueryIdInvalid
 from pyrogram.types import CallbackQuery, Message
-from database.inlineyardimcisi import get_search_results
+from database.inlineyardimcisi import get_search_results, unpack_new_file_id
 from utils import is_subscribed, get_size
 from config import Config
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultCachedDocument
@@ -119,3 +119,36 @@ async def delete_all_confirm(bot, query:CallbackQuery):
     else:
         return query.message.edit(f'deleteall yaparken sorun çıktı ?')
     
+@Client.on_message(~filters.channel & filters.command('sil') & filters.user(ADMINS))
+async def delete(bot, message):
+    """Delete file from database"""
+    reply = message.reply_to_message
+    if not (reply and reply.media):
+        return await message.reply_text('Silmek istediğiniz dosyayı /sil ile yanıtlayın', quote=True)
+    msg = await message.reply_text("İşleniyor...⏳", quote=True)
+    for file_type in (MessageMediaType.DOCUMENT, MessageMediaType.VIDEO, MessageMediaType.AUDIO):
+        media = getattr(reply, file_type.value, None)
+        if media is not None:
+            break
+    else:
+        return await msg.edit('Bu desteklenen bir dosya biçimi değil.')
+
+    file_id, file_ref = unpack_new_file_id(media.file_id)
+
+    result = await Media.collection.delete_one({
+        '_id': file_id,
+    })
+    if result.deleted_count:
+        await msg.edit('Dosya veritabanından başarıyla silindi.')
+    else:
+        # files indexed before https://github.com/EvamariaTG/EvaMaria/commit/f3d2a1bcb155faf44178e5d7a685a1b533e714bf#diff-86b613edf1748372103e94cacff3b578b36b698ef9c16817bb98fe9ef22fb669R39
+        # have original file name.
+        result = await Media.collection.delete_one({
+            'file_name': media.file_name,
+            'file_size': media.file_size,
+            'mime_type': media.mime_type
+        })
+        if result.deleted_count:
+            await msg.edit('Dosya veritabanından başarıyla silindi.')
+        else:
+            await msg.edit('Veritabanında dosya bulunamadı.')
