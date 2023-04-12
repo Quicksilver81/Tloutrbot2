@@ -3,7 +3,7 @@ from urllib.parse import quote
 from pyrogram import Client, emoji, filters
 from pyrogram.errors.exceptions.bad_request_400 import QueryIdInvalid
 from pyrogram.types import CallbackQuery
-from database.inlineyardimcisi import get_search_results
+from database.inlineyardimcisi import get_search_results, delete_all_files
 from utils import is_subscribed, get_size
 from config import Config
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultCachedDocument
@@ -89,3 +89,17 @@ async def answer(bot:Client, query:CallbackQuery):
                            cache_time=cache_time,
                            switch_pm_text=switch_pm_text,
                            switch_pm_parameter="okay")
+
+
+@Client.on_message(filters.command('deleteinline'))
+async def inlinedosyasil(bot, message):
+    tayp = 'Dosyalar'
+    await message.reply_text(
+        f'Tüm {tayp.lower()} silinecek.\nDevam etmek istiyor musunuz?',
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [InlineKeyboardButton(text=f"Tüm {tayp}ı Sil", callback_data=f"delete_all_files")]
+            ]
+        ),
+        quote=True,
+    )
