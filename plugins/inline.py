@@ -105,7 +105,7 @@ async def inlinedosyasil(bot, message):
         f'Tüm {tayp.lower()} silinecek.\nDevam etmek istiyor musunuz?',
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton(text=f"Tüm {tayp}ı Sil", callback_data=f"delete_all_files")]
+                [InlineKeyboardButton(text=f"Tüm {tayp}ı Sil", callback_data=delete_all_files)]
             ]
         ),
         quote=True,
