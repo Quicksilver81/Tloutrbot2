@@ -11,12 +11,12 @@ from database.inlineyardimcisi import Media
 logger = logging.getLogger(__name__)
 cache_time = 0 if Config.OWNER_ID or Config.AUTH_CHANNEL else Config.CACHE_TIME
 
-async def delete_all_files(bot, message):
+async def delete_all_files(message: Message):
     try:
         await Media.collection.drop()
         await message.edit_text(f"Tüm dosyalar silindi.\n\nŞimdi mutlu musun?")
     except Exception as e:
-        await bot.send_message(message.from_user.id, e)
+        await message.edit_text(message.from_user.id, e)
 
 
 def get_reply_markup(username, query):
@@ -105,8 +105,17 @@ async def inlinedosyasil(bot, message):
         f'Tüm {tayp.lower()} silinecek.\nDevam etmek istiyor musunuz?',
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton(text=f"Tüm {tayp}ı Sil", callback_data='delete_all_files')]
+                [InlineKeyboardButton(text=f"Tüm {tayp}ı Sil", callback_data=f"delete#{tayp}")]
             ]
         ),
         quote=True,
     )
+
+@Client.on_callback_query(filters.regex(r'^delete+.*$'))
+async def delete_all_confirm(bot, query:CallbackQuery):
+    nesilincek = query.data.split("#")[1]
+    if nesilincek == 'Dosyalar':
+        await delete_all_files(query.message)
+    else:
+        return query.message.edit(f'deleteall yaparken sorun çıktı ?')
+    
