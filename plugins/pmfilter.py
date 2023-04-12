@@ -238,17 +238,17 @@ async def give_filter(client,message):
             reply_text, btn, alert, fileid = await find_filter(group_id, keyword)
 
             if reply_text:
-                reply_text = reply_text.replace("\\n", "\n").replace("\\t", "\t")
-
+                r_text = reply_text.replace("\\n", "\n").replace("\\t", "\t")
+            reply_text = f"{r_text}\n\nOwner of This Magic: @MarvelTrRobot"
             if btn is not None:
                 try:
                     if fileid == "None":
                         if btn == "[]":
-                            await message.reply_text(reply_text, disable_web_page_preview=True)
+                            await message.reply_text(r_text, disable_web_page_preview=True)
                         else:
                             button = eval(btn)
                             await message.reply_text(
-                                reply_text,
+                                r_text,
                                 disable_web_page_preview=True,
                                 reply_markup=InlineKeyboardMarkup(button)
                             )
