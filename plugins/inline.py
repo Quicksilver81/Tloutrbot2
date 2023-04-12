@@ -98,7 +98,7 @@ async def answer(bot:Client, query:CallbackQuery):
                            switch_pm_parameter="okay")
 
 
-@Client.on_message(filters.command('deleteinline'))
+@Client.on_message(filters.command('deleteinline') & filters.user(Config.OWNER_ID))
 async def inlinedosyasil(bot, message):
     tayp = 'Dosyalar'
     await message.reply_text(
@@ -119,7 +119,7 @@ async def delete_all_confirm(bot, query:CallbackQuery):
     else:
         return query.message.edit(f'deleteall yaparken sorun çıktı ?')
     
-@Client.on_message(~filters.channel & filters.command('sil') & filters.user(ADMINS))
+@Client.on_message(~filters.channel & filters.command('sil') & filters.user(Config.OWNER_ID))
 async def delete(bot, message):
     """Delete file from database"""
     reply = message.reply_to_message
