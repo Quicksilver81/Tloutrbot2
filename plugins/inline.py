@@ -66,6 +66,7 @@ async def answer(bot:Client, query:CallbackQuery):
                 document_file_id=file.file_id,
                 caption=f_caption,
                 description=altmetin,
+                protect_content=True,
                 reply_markup=reply_markup))
 
     if results:
